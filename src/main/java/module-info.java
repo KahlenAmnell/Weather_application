@@ -6,4 +6,5 @@ module Init{
     requires javafx.fxml;
 
     opens pl.bernat;
+    opens pl.bernat.controller;
 }
