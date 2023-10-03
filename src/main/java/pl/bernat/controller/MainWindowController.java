@@ -13,16 +13,7 @@ import java.util.ResourceBundle;
 
 public class MainWindowController extends BaseController implements Initializable {
     @FXML
-    private TextField rightChangeCityTextField, leftChangeCityTextField;
-
-    @FXML
-    private VBox rightChangeCityVBox, leftChangeCityVBox;
-
-    @FXML
     private Label closeLabel;
-
-    @FXML
-    private Label rightErrorLabel, leftErrorLabel;
 
     @FXML
     private HBox rightForecast, leftForecast;
@@ -37,26 +28,6 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     void closeAction() {
-
-    }
-
-    @FXML
-    void leftDisableChangeCityVBox() {
-
-    }
-
-    @FXML
-    void leftSaveCityAction() {
-
-    }
-
-    @FXML
-    void rightSaveCityAction() {
-
-    }
-
-    @FXML
-    void rightDisableChangeCityVBox() {
 
     }
 
