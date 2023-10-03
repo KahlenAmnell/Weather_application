@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="872.0" style="-fx-background-color: #011638;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="620.0" prefWidth="872.0">
+         <top>
+            <Label fx:id="closeLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" onMouseClicked="#closeAction" prefHeight="36.0" prefWidth="849.0" styleClass="hoverLabel" text="x" textAlignment="RIGHT" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </top>
+         <center>
+            <HBox fx:id="forecastHBox" prefHeight="550.0" prefWidth="838.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="550.0" prefWidth="385.0">
+                     <HBox.margin>
+                        <Insets left="17.0" right="17.0" />
+                     </HBox.margin>
+                     <children>
+                        <fx:include fx:id="leftForecast" source="Forecast.fxml" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="27.0" layoutY="10.0" prefHeight="550.0" prefWidth="385.0">
+                     <children>
+                        <fx:include fx:id="rightForecast" source="Forecast.fxml" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="17.0" right="17.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+               </children></HBox>
+         </center>
+         <left>
+            <Pane prefHeight="200.0" prefWidth="17.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <Pane prefHeight="200.0" prefWidth="17.0" BorderPane.alignment="CENTER" />
+         </right>
+         <bottom>
+            <Pane prefHeight="35.0" prefWidth="671.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>
