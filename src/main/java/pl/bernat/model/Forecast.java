@@ -6,7 +6,7 @@ public class Forecast {
     String weatherIcon;
 
     public Forecast(String date, double temperature, String weatherIcon) {
-        this.date = date;
+        this.date = PolishDayOfWeek.polishName(date);
         this.temperature = temperature;
         this.weatherIcon = weatherIcon;
     }
