@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import pl.bernat.model.Forecast;
 import pl.bernat.model.Weather;
 
 import java.io.IOException;
@@ -12,6 +13,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OpenWeatherMapClient implements WeatherClient{
     private final String API_ID = Config.API_ID;
@@ -76,6 +79,26 @@ public class OpenWeatherMapClient implements WeatherClient{
                 windSpeed,
                 cityName
         );
+    }
+
+    public List<Forecast> getForecasts(){
+        List<Forecast> forecasts = new ArrayList<>();
+        for(int i=8; i<=32; i+=8){
+            forecasts.add(setForecast(i));
+        }
+        return forecasts;
+    }
+
+    private Forecast setForecast(int i) {
+        JsonArray list = gson.fromJson(result, JsonObject.class).getAsJsonArray("list");
+        String date = list.get(i).getAsJsonObject().get("dt_txt").getAsString();
+        JsonObject main = list.get(i).getAsJsonObject().get("main").getAsJsonObject();
+        JsonArray weather = list.get(i).getAsJsonObject().get("weather").getAsJsonArray();
+
+        double temperature = (int) Math.round(main.get("temp").getAsDouble());
+        String weatherIcon = weather.get(0).getAsJsonObject().get("icon").getAsString();
+
+        return new Forecast(date, temperature, weatherIcon);
     }
 
     private String replaceSpaceWithPlus(String cityName) {

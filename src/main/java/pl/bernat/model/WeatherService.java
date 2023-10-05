@@ -2,6 +2,8 @@ package pl.bernat.model;
 
 import pl.bernat.model.client.WeatherClient;
 
+import java.util.List;
+
 public class WeatherService {
     private final WeatherClient weatherClient;
 
@@ -11,5 +13,9 @@ public class WeatherService {
 
     public Weather getWeather(String cityName) {
         return weatherClient.getWeather(cityName);
+    }
+
+    public List<Forecast> getForecasts(){
+        return weatherClient.getForecasts();
     }
 }
