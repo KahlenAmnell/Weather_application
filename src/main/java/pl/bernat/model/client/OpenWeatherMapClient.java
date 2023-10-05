@@ -3,6 +3,7 @@ package pl.bernat.model.client;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import pl.bernat.model.Weather;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class OpenWeatherMapClient implements WeatherClient{
     public Weather getWeather(String cityName) {
         cityName = replaceSpaceWithPlus(cityName);
 
-        String request = "https://api.openweathermap.org/data/2.5/forecast?appid=" + API_ID + "&units=" + UNITS + "lang=" + LANG + "&q=" + cityName;
+        String request = "https://api.openweathermap.org/data/2.5/forecast?appid=" + API_ID + "&units=" + UNITS + "&lang=" + LANG + "&q=" + cityName;
 
         try {
             HttpRequest httpRequest = HttpRequest.newBuilder()
@@ -45,13 +46,13 @@ public class OpenWeatherMapClient implements WeatherClient{
     }
 
     private Weather setWeather() {
-        JsonObject cod = gson.fromJson(result, JsonObject.class).getAsJsonObject("cod");
+        JsonPrimitive cod = gson.fromJson(result, JsonObject.class).getAsJsonPrimitive("cod");
         JsonArray list = gson.fromJson(result, JsonObject.class).getAsJsonArray("list");
         JsonObject main = list.get(0).getAsJsonObject().get("main").getAsJsonObject();
         JsonArray weather = list.get(0).getAsJsonObject().get("weather").getAsJsonArray();
         JsonObject clouds = list.get(0).getAsJsonObject().get("clouds").getAsJsonObject();
         JsonObject wind = list.get(0).getAsJsonObject().get("wind").getAsJsonObject();
-        JsonObject date = list.get(0).getAsJsonObject().get("dt_txt").getAsJsonObject();
+        JsonPrimitive date = list.get(0).getAsJsonObject().get("dt_txt").getAsJsonPrimitive();
         JsonObject city =  gson.fromJson(result, JsonObject.class).getAsJsonObject("city");
 
         double temperature = (int) Math.round(main.get("temp").getAsDouble());
