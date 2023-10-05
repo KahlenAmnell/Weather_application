@@ -149,7 +149,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="316.0" text="Podane miasto jest nieprawidłowe!" textFill="RED">
+                        <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="316.0" text="Podane miasto jest nieprawidłowe!" textFill="RED" visible="false">
                            <font>
                               <Font size="16.0" />
                            </font>

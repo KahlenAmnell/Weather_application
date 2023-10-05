@@ -93,15 +93,23 @@ public class ForecastController implements Initializable {
     @FXML
     void saveCityAction() {
         cityNameLabel.setText(changeCityTextField.getText());
-        getWeather();
-        closeChangeCityVbox();
+        if(getWeather()) {
+            errorLabel.setVisible(false);
+            closeChangeCityVbox();
+        } else {
+            errorLabel.setVisible(true);
+        }
     }
 
-    void getWeather(){
+    boolean getWeather(){
         Weather weather = weatherService.getWeather(cityNameLabel.getText());
-        displayCurrentWeather(weather);
-        List<Forecast> forecasts = weatherService.getForecasts();
-        displayForecasts(forecasts);
+        if(weather != null) {
+            displayCurrentWeather(weather);
+            List<Forecast> forecasts = weatherService.getForecasts();
+            displayForecasts(forecasts);
+            return true;
+        }
+        return false;
     }
 
     private void displayCurrentWeather(Weather weather) {
