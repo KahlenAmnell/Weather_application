@@ -16,6 +16,8 @@ import java.net.URL;
 import java.util.*;
 
 public class ForecastController implements Initializable {
+
+    //Vbox to change city variables
     @FXML
     private TextField changeCityTextField;
 
@@ -23,12 +25,14 @@ public class ForecastController implements Initializable {
     private VBox changeCityVBox;
 
     @FXML
+    private Label errorLabel;
+
+    //Current weather variables
+    @FXML
     private Label cityNameLabel;
 
     @FXML
     private Label cloudinessLabel;
-
-
 
     @FXML
     private Label dateLabel;
@@ -37,17 +41,10 @@ public class ForecastController implements Initializable {
     private Label descriptionLabel;
 
     @FXML
-    private Label errorLabel;
-
-    @FXML
     private Label humidityLabel;
-
-
 
     @FXML
     private Label pressureLabel;
-
-
 
     @FXML
     private Label temperatureLabel;
@@ -58,6 +55,7 @@ public class ForecastController implements Initializable {
     @FXML
     private Label windSpeedLabel;
 
+    //Forecasts variables
     private final List<Label> forecastDates = new ArrayList<>();
     @FXML
     private Label date1Label, date2Label, date3Label, date4Label;
@@ -80,6 +78,10 @@ public class ForecastController implements Initializable {
         Collections.addAll(forecastTemperatures, temperature1Label, temperature2Label, temperature3Label, temperature4Label);
     }
 
+    public void setInitiatingWeather(String cityName) {
+        cityNameLabel.setText(cityName);
+        getWeather();
+    }
     @FXML
     void disableChangeCityVBox() {
         closeChangeCityVbox();

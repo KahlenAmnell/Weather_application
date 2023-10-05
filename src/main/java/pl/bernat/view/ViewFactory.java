@@ -43,4 +43,9 @@ public class ViewFactory {
         loader.setController(controller);
         return loader;
     }
+
+    public void closeStage (Stage stageToClose){
+        stageToClose.close();
+        activeStages.remove(stageToClose);
+    }
 }
