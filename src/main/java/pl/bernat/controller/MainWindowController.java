@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import pl.bernat.model.WeatherService;
+import pl.bernat.model.WeatherServiceFactory;
 import pl.bernat.view.ViewFactory;
 
 import java.net.URL;
@@ -23,7 +25,6 @@ public class MainWindowController extends BaseController implements Initializabl
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
-
     }
 
     @FXML
