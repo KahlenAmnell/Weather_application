@@ -1,0 +1,7 @@
+.hoverLabel:hover{
+    -fx-font-weight:bold;
+}
+
+.glowImage:hover{
+    -fx-opacity: 1;
+}

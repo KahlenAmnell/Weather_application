@@ -19,9 +19,6 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label closeLabel;
 
     @FXML
-    private HBox rightForecast, leftForecast;
-
-    @FXML
     private ForecastController rightForecastController, leftForecastController;
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
