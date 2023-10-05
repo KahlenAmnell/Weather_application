@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import pl.bernat.model.WeatherService;
 import pl.bernat.model.WeatherServiceFactory;
 import pl.bernat.view.ViewFactory;
@@ -18,9 +19,6 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label closeLabel;
 
     @FXML
-    private HBox rightForecast, leftForecast;
-
-    @FXML
     private ForecastController rightForecastController, leftForecastController;
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
@@ -29,10 +27,13 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     void closeAction() {
-
+        Stage stage = (Stage) closeLabel.getScene().getWindow();
+        viewFactory.closeStage(stage);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        rightForecastController.setInitiatingWeather("Dobrzykowice");
+        leftForecastController.setInitiatingWeather("Kraków");
     }
 }

@@ -37,7 +37,6 @@ public class OpenWeatherMapClient implements WeatherClient{
 
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             result = response.body();
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -45,7 +44,11 @@ public class OpenWeatherMapClient implements WeatherClient{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return setWeather();
+        String cod = gson.fromJson(result, JsonObject.class).getAsJsonPrimitive("cod").getAsString();
+        if(cod.equals("200")){
+            return setWeather();
+        }
+        return null;
     }
 
     private Weather setWeather() {

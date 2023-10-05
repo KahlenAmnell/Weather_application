@@ -12,7 +12,7 @@
    <children>
       <BorderPane prefHeight="620.0" prefWidth="872.0">
          <top>
-            <Label fx:id="closeLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" onMouseClicked="#closeAction" prefHeight="36.0" prefWidth="849.0" styleClass="hoverLabel" text="x" textAlignment="RIGHT" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="closeLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" onMouseClicked="#closeAction" prefHeight="36.0" prefWidth="849.0" styleClass="hoverLabel" stylesheets="@../CSS/Style.css" text="x" textAlignment="RIGHT" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
