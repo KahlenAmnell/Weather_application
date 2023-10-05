@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.bernat.controller.ForecastController">
+<HBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.bernat.controller.ForecastController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
