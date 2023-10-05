@@ -82,7 +82,7 @@ public class ForecastController implements Initializable {
 
     @FXML
     void disableChangeCityVBox() {
-
+        closeChangeCityVbox();
     }
 
     @FXML
