@@ -21,9 +21,14 @@ public class OpenWeatherMapClient implements WeatherClient{
     private final String UNITS = "metric";
     private final String LANG = "pl";
     private final Gson gson = new Gson();
+    private HttpClient httpClient;
     String result;
+    public OpenWeatherMapClient() {
+        this.httpClient = HttpClient.newHttpClient();
+    }
+
     @Override
-    public Weather getWeather(String cityName) {
+    public Weather downloadWeather(String cityName) {
         cityName = replaceSpaceWithPlus(cityName);
 
         String request = "https://api.openweathermap.org/data/2.5/forecast?appid=" + API_ID + "&units=" + UNITS + "&lang=" + LANG + "&q=" + cityName;
@@ -32,8 +37,6 @@ public class OpenWeatherMapClient implements WeatherClient{
             HttpRequest httpRequest = HttpRequest.newBuilder()
                     .uri(new URI(request))
                     .build();
-
-            HttpClient httpClient = HttpClient.newHttpClient();
 
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             result = response.body();
@@ -46,12 +49,12 @@ public class OpenWeatherMapClient implements WeatherClient{
         }
         String cod = gson.fromJson(result, JsonObject.class).getAsJsonPrimitive("cod").getAsString();
         if(cod.equals("200")){
-            return setWeather();
+            return assignWeatherData();
         }
         return null;
     }
 
-    private Weather setWeather() {
+    private Weather assignWeatherData() {
         JsonPrimitive cod = gson.fromJson(result, JsonObject.class).getAsJsonPrimitive("cod");
         JsonArray list = gson.fromJson(result, JsonObject.class).getAsJsonArray("list");
         JsonObject main = list.get(0).getAsJsonObject().get("main").getAsJsonObject();
@@ -84,15 +87,15 @@ public class OpenWeatherMapClient implements WeatherClient{
         );
     }
 
-    public List<Forecast> getForecasts(){
+    public List<Forecast> downloadForecasts(){
         List<Forecast> forecasts = new ArrayList<>();
         for(int i=8; i<=32; i+=8){
-            forecasts.add(setForecast(i));
+            forecasts.add(assignForecastData(i));
         }
         return forecasts;
     }
 
-    private Forecast setForecast(int i) {
+    private Forecast assignForecastData(int i) {
         JsonArray list = gson.fromJson(result, JsonObject.class).getAsJsonArray("list");
         String date = list.get(i).getAsJsonObject().get("dt_txt").getAsString();
         JsonObject main = list.get(i).getAsJsonObject().get("main").getAsJsonObject();

@@ -11,11 +11,11 @@ public class WeatherService {
         this.weatherClient = weatherClient;
     }
 
-    public Weather getWeather(String cityName) {
-        return weatherClient.getWeather(cityName);
+    public Weather downloadWeather(String cityName) {
+        return weatherClient.downloadWeather(cityName);
     }
 
-    public List<Forecast> getForecasts(){
-        return weatherClient.getForecasts();
+    public List<Forecast> downloadForecasts(){
+        return weatherClient.downloadForecasts();
     }
 }

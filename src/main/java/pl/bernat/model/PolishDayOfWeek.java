@@ -11,23 +11,17 @@ public class PolishDayOfWeek {
     }
 
     private static String nameOfDay(int number) {
+        String result;
         switch (number){
-            case 1:
-                return "Poniedziałek";
-            case 2:
-                return "Wtorek";
-            case 3:
-                return "Środa";
-            case 4:
-                return "Czwartek";
-            case 5:
-                return "Piątek";
-            case 6:
-                return "Sobota";
-            case 7:
-                return "Niedziela";
-            default:
-                return "Błąd";
+            case 1: result = "Poniedziałek"; break;
+            case 2: result = "Wtorek"; break;
+            case 3: result = "Środa"; break;
+            case 4: result = "Czwartek"; break;
+            case 5: result = "Piątek"; break;
+            case 6: result = "Sobota"; break;
+            case 7: result = "Niedziela"; break;
+            default: result = "Błąd"; break;
         }
+        return result;
     }
 }
