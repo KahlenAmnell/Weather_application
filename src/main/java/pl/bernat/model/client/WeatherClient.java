@@ -6,7 +6,7 @@ import pl.bernat.model.Weather;
 import java.util.List;
 
 public interface WeatherClient {
-    Weather getWeather(String cityName);
+    Weather downloadWeather(String cityName);
 
-    List<Forecast> getForecasts();
+    List<Forecast> downloadForecasts();
 }

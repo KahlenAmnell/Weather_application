@@ -104,10 +104,10 @@ public class ForecastController implements Initializable {
     }
 
     boolean getWeather(){
-        Weather weather = weatherService.getWeather(cityNameLabel.getText());
+        Weather weather = weatherService.downloadWeather(cityNameLabel.getText());
         if(weather != null) {
             displayCurrentWeather(weather);
-            List<Forecast> forecasts = weatherService.getForecasts();
+            List<Forecast> forecasts = weatherService.downloadForecasts();
             displayForecasts(forecasts);
             return true;
         }
