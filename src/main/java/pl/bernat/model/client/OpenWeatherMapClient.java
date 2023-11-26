@@ -21,6 +21,13 @@ public class OpenWeatherMapClient implements WeatherClient{
     private final String UNITS = "metric";
     private final String LANG = "pl";
     private final Gson gson = new Gson();
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    private String url = "https:/";
+
     private HttpClient httpClient;
     String result;
     public OpenWeatherMapClient() {
@@ -31,15 +38,15 @@ public class OpenWeatherMapClient implements WeatherClient{
     public Weather downloadWeather(String cityName) {
         cityName = replaceSpaceWithPlus(cityName);
 
-        String request = "https://api.openweathermap.org/data/2.5/forecast?appid=" + API_ID + "&units=" + UNITS + "&lang=" + LANG + "&q=" + cityName;
+        String request = url + "/api.openweathermap.org/data/2.5/forecast?appid=" + API_ID + "&units=" + UNITS + "&lang=" + LANG + "&q=" + cityName;
 
         try {
             HttpRequest httpRequest = HttpRequest.newBuilder()
                     .uri(new URI(request))
                     .build();
 
-            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            result = response.body();
+            result = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()).body();
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
