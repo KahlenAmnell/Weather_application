@@ -51,12 +51,15 @@ class OpenWeatherMapClientTest {
 
     @Test
     public void givenCityNameShouldReturnWeather() {
+        //given
         generateExampleCorrectResponseStub();
         OpenWeatherMapClient weatherClient = new OpenWeatherMapClient();
         weatherClient.setUrl(LOCALHOST_URL);
 
+        //when
         Weather result = weatherClient.downloadWeather(CITY_NAME);
 
+        //then
         assertThat(result.getTemperature(), equalTo(8.0));
         assertThat(result.getCloudiness(), equalTo(83));
         assertThat(result.getWeatherDescription(), equalTo("słabe opady deszczu"));
@@ -65,23 +68,30 @@ class OpenWeatherMapClientTest {
 
     @Test
     public void givenIncorrectCityNameShouldReturnNull() {
+        //given
         generateNotFoundCityResponseStub();
         OpenWeatherMapClient weatherClient = new OpenWeatherMapClient();
         weatherClient.setUrl(LOCALHOST_URL);
 
+        //when
         Weather result = weatherClient.downloadWeather(CITY_NAME);
 
+        //then
         assertThat(result, equalTo(null));
     }
 
     @Test
     public void givenCityNameShouldReturnForecasts() {
+        //given
         generateExampleCorrectResponseStub();
         OpenWeatherMapClient weatherClient = new OpenWeatherMapClient();
         weatherClient.setUrl(LOCALHOST_URL);
+
+        //when
         weatherClient.downloadWeather(CITY_NAME);
         List<Forecast> result = weatherClient.downloadForecasts();
 
+        //then
         assertThat(result.size(), equalTo(4));
         assertThat(result.get(0).getTemperature(), equalTo(1.0));
         assertThat(result.get(1).getDate(), equalTo("Czwartek"));
