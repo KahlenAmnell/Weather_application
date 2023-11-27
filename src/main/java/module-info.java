@@ -1,4 +1,4 @@
-module Init{
+module Weather_application{
     exports pl.bernat;
 
     requires javafx.graphics;
