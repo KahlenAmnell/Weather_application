@@ -25,14 +25,8 @@ public class OpenWeatherMapClient implements WeatherClient{
     public void setUrl(String url) {
         this.url = url;
     }
-
     private String url = "https:/";
-
-    private HttpClient httpClient;
     String result;
-    public OpenWeatherMapClient() {
-        this.httpClient = HttpClient.newHttpClient();
-    }
 
     @Override
     public Weather downloadWeather(String cityName) {
@@ -45,6 +39,7 @@ public class OpenWeatherMapClient implements WeatherClient{
                     .uri(new URI(request))
                     .build();
 
+            HttpClient httpClient = HttpClient.newHttpClient();
             result = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()).body();
 
         } catch (IOException e) {
