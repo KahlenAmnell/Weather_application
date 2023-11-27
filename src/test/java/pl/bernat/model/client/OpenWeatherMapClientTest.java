@@ -4,7 +4,6 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
 import pl.bernat.model.Forecast;
 import pl.bernat.model.Weather;
 
@@ -20,10 +19,10 @@ class OpenWeatherMapClientTest {
     private static final String EXAMPLE_API_RESPONSE_FILE = "exampleApiResponseWeather.json";
     private static final String EXAMPLE_CITY_NOT_FOUND_RESPONSE_FILE = "exampleCityNotFoundResponse.json";
     private static final String API_ID = Config.API_ID;
-    private static final String main = "/api.openweathermap.org/data/2.5/forecast?appid=";
-    private static final String additional = "&units=metric&lang=pl&q=";
-    private static final String cityName = "wroclaw";
-    private static final String testUrl = main + API_ID + additional + cityName;
+    private static final String MAIN = "/api.openweathermap.org/data/2.5/forecast?appid=";
+    private static final String ADDITIONAL = "&units=metric&lang=pl&q=";
+    private static final String CITY_NAME = "wroclaw";
+    private static final String TEST_URL = MAIN + API_ID + ADDITIONAL + CITY_NAME;
     private static final String LOCALHOST_URL = "http://localhost:8090";
     private static WireMockServer wireMockServer;
 
@@ -44,7 +43,7 @@ class OpenWeatherMapClientTest {
         generateExampleCorrectResponseStub();
         given().
         when().
-            get(LOCALHOST_URL + testUrl).
+            get(LOCALHOST_URL + TEST_URL).
         then().
                 statusCode(200).
                 assertThat().body("cod", is("200"));
@@ -56,7 +55,7 @@ class OpenWeatherMapClientTest {
         OpenWeatherMapClient weatherClient = new OpenWeatherMapClient();
         weatherClient.setUrl(LOCALHOST_URL);
 
-        Weather result = weatherClient.downloadWeather(cityName);
+        Weather result = weatherClient.downloadWeather(CITY_NAME);
 
         assertThat(result.getTemperature(), equalTo(8.0));
         assertThat(result.getCloudiness(), equalTo(83));
@@ -70,7 +69,7 @@ class OpenWeatherMapClientTest {
         OpenWeatherMapClient weatherClient = new OpenWeatherMapClient();
         weatherClient.setUrl(LOCALHOST_URL);
 
-        Weather result = weatherClient.downloadWeather(cityName);
+        Weather result = weatherClient.downloadWeather(CITY_NAME);
 
         assertThat(result, equalTo(null));
     }
@@ -80,7 +79,7 @@ class OpenWeatherMapClientTest {
         generateExampleCorrectResponseStub();
         OpenWeatherMapClient weatherClient = new OpenWeatherMapClient();
         weatherClient.setUrl(LOCALHOST_URL);
-        weatherClient.downloadWeather(cityName);
+        weatherClient.downloadWeather(CITY_NAME);
         List<Forecast> result = weatherClient.downloadForecasts();
 
         assertThat(result.size(), equalTo(4));
@@ -93,14 +92,14 @@ class OpenWeatherMapClientTest {
 
 
     private static void generateExampleCorrectResponseStub(){
-        wireMockServer.stubFor(get(urlEqualTo(testUrl))
+        wireMockServer.stubFor(get(urlEqualTo(TEST_URL))
                 .willReturn(aResponse().withHeader("Content-Type", "application/json")
                         .withStatus(200)
                         .withBodyFile("json/" + EXAMPLE_API_RESPONSE_FILE)));
     }
 
     private static void generateNotFoundCityResponseStub(){
-        wireMockServer.stubFor(get(urlEqualTo(testUrl))
+        wireMockServer.stubFor(get(urlEqualTo(TEST_URL))
                 .willReturn(aResponse().withHeader("Content-Type", "application/json")
                         .withStatus(200)
                         .withBodyFile("json/" + EXAMPLE_CITY_NOT_FOUND_RESPONSE_FILE)));
